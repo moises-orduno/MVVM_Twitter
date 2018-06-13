@@ -8,7 +8,7 @@ import java.util.Locale;
 public class DateParser {
 
     public static String parseDate(Date date){
-        return new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(date);
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(date);
 
     }
 

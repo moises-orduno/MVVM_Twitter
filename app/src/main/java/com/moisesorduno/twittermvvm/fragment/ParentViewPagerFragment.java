@@ -1,6 +1,7 @@
 package com.moisesorduno.twittermvvm.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ParentViewPagerFragment  extends Fragment {
 
     public static final String TAG = ParentViewPagerFragment.class.getName();
-    private static List<Poll> mPolls= new ArrayList<>();
+    private  List<Poll> mPolls= new ArrayList<>();
 
     public static ParentViewPagerFragment newInstance() {
         return new ParentViewPagerFragment();
@@ -34,11 +35,10 @@ public class ParentViewPagerFragment  extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_parent_viewpager, container, false);
 
         ViewPager viewPager = root.findViewById(R.id.viewPager);
-        /** Important: Must use the child FragmentManager or you will see side effects. */
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
 
@@ -46,8 +46,8 @@ public class ParentViewPagerFragment  extends Fragment {
         return root;
     }
 
-    public static class MyAdapter extends FragmentPagerAdapter {
-        public MyAdapter(FragmentManager fm) {
+    public class MyAdapter extends FragmentPagerAdapter {
+        MyAdapter(FragmentManager fm) {
             super(fm);
         }
 

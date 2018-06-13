@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#faadce</color>
-    <color name="colorPrimaryDark">#c557ce</color>
-    <color name="colorAccent">#3ce1b1</color>
+    <color name="colorPrimary">#b6faad</color>
+    <color name="colorPrimaryDark">#236634</color>
+    <color name="colorAccent">#e13c3c</color>
     <color name="colorAmlo">#990000</color>
     <color name="colorAnaya">#0000ff</color>
     <color name="colorMeade">#33cc33</color>

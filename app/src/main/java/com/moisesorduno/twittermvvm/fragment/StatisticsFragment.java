@@ -19,6 +19,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.moisesorduno.twittermvvm.R;
 import com.moisesorduno.twittermvvm.adapter.DateXAxisValueFormatter;
 import com.moisesorduno.twittermvvm.common.CSVReader;
+import com.moisesorduno.twittermvvm.common.GraphBuilder;
 import com.moisesorduno.twittermvvm.model.Poll;
 import com.moisesorduno.twittermvvm.viewmodel.StatisticsViewModel;
 
@@ -36,7 +37,7 @@ public class StatisticsFragment extends Fragment implements java.util.Observer {
     private LineChart mChart;
     private String mTitle;
     private int mFilename;
-    private int [] mColors={Color.BLUE,Color.rgb(0, 153, 51),Color.rgb(255,155,102),Color.RED};
+    private GraphBuilder mGraphBuilder = new GraphBuilder();
 
     public StatisticsFragment() {
         // Required empty public constructor
@@ -86,43 +87,7 @@ public class StatisticsFragment extends Fragment implements java.util.Observer {
             e.printStackTrace();
         }
 
-        String[] pollDates  = new String[rows.get(1).length];
-        LineData lineData = new LineData();
-
-        for (int j = 1; j < 5; j++) {
-
-            List<Entry> entries = new ArrayList<>();
-
-
-
-            for (int i = 2; i < rows.get(0).length; i++) {
-                entries.add(new Entry(i, Float.valueOf(rows.get(j)[i])));
-                pollDates[i] = rows.get(0)[i].substring(3);
-            }
-            LineDataSet dataSet = new LineDataSet(entries, rows.get(j)[0]); // add entries to dataset
-            dataSet.setCircleColor(mColors[j-1]);
-            dataSet.setColor(mColors[j-1]);
-            lineData.addDataSet(dataSet);
-
-        }
-
-
-
-//
-//        LineDataSet dataSet = new LineDataSet(entries, rows.get(1)[0]); // add entries to dataset
-//        dataSet.setCircleColor(Color.BLACK);
-//        dataSet.setColor(Color.BLACK);
-//
-//
-//        LineData lineData = new LineData(dataSet);
-
-
-
-
-        XAxis xAxis = mChart.getXAxis();
-        xAxis.setValueFormatter(new DateXAxisValueFormatter(pollDates));
-        mChart.setData(lineData);
-        mChart.invalidate();
+        mGraphBuilder.buildLineData(rows,mChart);
 
     }
 
