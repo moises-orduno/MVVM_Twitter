@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.moisesorduno.twittermvvm.R;
+import com.moisesorduno.twittermvvm.fragment.ParentViewPagerFragment;
 import com.moisesorduno.twittermvvm.fragment.StatisticsFragment;
 import com.moisesorduno.twittermvvm.fragment.TwitterFragment;
 
-public class MainActivity extends AppCompatActivity implements
-        StatisticsFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity  {
 
 //    protected ActivityMainBinding activityMainBinding
 
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,new StatisticsFragment(), StatisticsFragment.TAG).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,new ParentViewPagerFragment(), ParentViewPagerFragment.TAG).commit();
 
                     return true;
                 case R.id.navigation_twitter:
@@ -50,12 +50,8 @@ public class MainActivity extends AppCompatActivity implements
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_layout,new StatisticsFragment(), StatisticsFragment.TAG).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,new ParentViewPagerFragment(), ParentViewPagerFragment.TAG).commit();
 
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }

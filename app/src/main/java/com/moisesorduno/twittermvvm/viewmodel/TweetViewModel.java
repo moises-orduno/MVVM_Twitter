@@ -8,22 +8,18 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.moisesorduno.twittermvvm.api.TwitterApi;
+import com.moisesorduno.twittermvvm.common.DateParser;
 import com.moisesorduno.twittermvvm.common.PreferencesController;
 import com.moisesorduno.twittermvvm.model.Tweet;
 import com.moisesorduno.twittermvvm.model.TwitterTokenType;
 
 import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -38,7 +34,6 @@ public class TweetViewModel extends java.util.Observable {
     private List<Tweet> mTweetList;
     private Context mContext;
     private TwitterApi mApi;
-    private TwitterTokenType mTwitterTokenType;
     public static final String TAG = TweetViewModel.class.getSimpleName();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private String mScreenName;
@@ -114,6 +109,7 @@ public class TweetViewModel extends java.util.Observable {
             observable = Observable.merge(
                     mApi.getTweetListByUser(accessToken, TwitterApi.TWITTER_USER_AMLO),
                     mApi.getTweetListByUser(accessToken, TwitterApi.TWITTER_USER_ANAYA),
+                    mApi.getTweetListByUser(accessToken, TwitterApi.TWITTER_USER_BRONCO),
                     mApi.getTweetListByUser(accessToken, TwitterApi.TWITTER_USER_MEADE)
             );
         } else {
@@ -134,7 +130,7 @@ public class TweetViewModel extends java.util.Observable {
                 .map(new Function<Tweet, Tweet>() {
                     @Override
                     public Tweet apply(Tweet tweet) throws Exception {
-                        tweet.setSimplifiedCreatedAt(formatTweetDate(tweet.getCreatedAt()));
+                        tweet.setSimplifiedCreatedAt(DateParser.formatTweetDateToDate(tweet.getCreatedAt()));
                         return tweet;
                     }
                 })
@@ -177,22 +173,9 @@ public class TweetViewModel extends java.util.Observable {
             public int compare(Tweet o1, Tweet o2) {
                 if (o1.getCreatedAt() == null || o2.getCreatedAt() == null)
                     return 0;
-                return formatTweetDate(o2.getCreatedAt()).compareTo(formatTweetDate(o1.getCreatedAt()));
+                return DateParser.formatTweetDateToDate(o2.getCreatedAt()).compareTo(DateParser.formatTweetDateToDate(o1.getCreatedAt()));
             }
         });
-
-    }
-
-    private Date formatTweetDate(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", Locale.ENGLISH);
-        sdf.setLenient(true);
-
-        try {
-            return sdf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
 
     }
 

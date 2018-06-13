@@ -20,8 +20,6 @@ public class CSVReader {
         String line;
         String csvSplitBy = ",";
 
-        br.readLine();
-
         while ((line = br.readLine()) != null) {
             String[] row = line.split(csvSplitBy);
             mRows.add(row);

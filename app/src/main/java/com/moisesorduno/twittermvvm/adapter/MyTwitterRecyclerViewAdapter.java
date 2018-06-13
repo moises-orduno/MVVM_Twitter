@@ -1,5 +1,6 @@
 package com.moisesorduno.twittermvvm.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.moisesorduno.twittermvvm.R;
+import com.moisesorduno.twittermvvm.common.DateParser;
 import com.moisesorduno.twittermvvm.model.Tweet;
 
 import java.text.SimpleDateFormat;
@@ -24,22 +26,20 @@ public class MyTwitterRecyclerViewAdapter  extends RecyclerView.Adapter<MyTwitte
         mListener = listener;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_item_tweet, parent, false);
         return new ViewHolder(view);
     }
 
-    private String parseDate(Date date){
-        return new SimpleDateFormat("yyyy-MM-dd").format(date);
 
-    }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mTextViewUser.setText(String.format("%s %s", holder.mItem.getUser().getName(),parseDate(holder.mItem.getSimplifiedCreatedAt())));
+        holder.mTextViewUser.setText(String.format("%s %s", holder.mItem.getUser().getName(), DateParser.parseDate(holder.mItem.getSimplifiedCreatedAt())));
         holder.mTextViewTweet.setText(holder.mItem.getFullText());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
