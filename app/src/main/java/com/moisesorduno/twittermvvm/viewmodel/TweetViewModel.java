@@ -5,13 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.moisesorduno.twittermvvm.api.TwitterApi;
 import com.moisesorduno.twittermvvm.common.DateParser;
 import com.moisesorduno.twittermvvm.common.PreferencesController;
-import com.moisesorduno.twittermvvm.model.Tweet;
-import com.moisesorduno.twittermvvm.model.TwitterTokenType;
+import com.moisesorduno.twittermvvm.model.tweet.Tweet;
+import com.moisesorduno.twittermvvm.model.tweet.TwitterTokenType;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import io.reactivex.schedulers.Schedulers;
 public class TweetViewModel extends java.util.Observable {
 
     private final RecyclerView mRecyclerView;
-    private final ProgressBar mProgressBar;
+    private final LottieAnimationView mAnimationView;
     private List<Tweet> mTweetList;
     private Context mContext;
     private TwitterApi mApi;
@@ -39,10 +39,10 @@ public class TweetViewModel extends java.util.Observable {
     private String mScreenName;
 
 
-    public TweetViewModel(Context context, RecyclerView recyclerView, ProgressBar progressBar) {
+    public TweetViewModel(Context context, RecyclerView recyclerView, LottieAnimationView animationView) {
         mContext = context;
         mRecyclerView = recyclerView;
-        mProgressBar = progressBar;
+        mAnimationView = animationView;
         mApi = TwitterApi.getInstance();
         mTweetList = new ArrayList<>();
 
@@ -201,6 +201,14 @@ public class TweetViewModel extends java.util.Observable {
 
     private void showLoader(boolean isLoading) {
         mRecyclerView.setEnabled(!isLoading);
-        mProgressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+       if(isLoading){
+           mAnimationView.playAnimation();
+           mAnimationView.setVisibility(View.VISIBLE);
+       }
+
+       else {
+           mAnimationView.pauseAnimation();
+           mAnimationView.setVisibility(View.GONE);
+       }
     }
 }

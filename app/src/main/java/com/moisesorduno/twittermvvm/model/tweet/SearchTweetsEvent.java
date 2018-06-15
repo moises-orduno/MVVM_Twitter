@@ -1,4 +1,4 @@
-package com.moisesorduno.twittermvvm.model;
+package com.moisesorduno.twittermvvm.model.tweet;
 
 public class SearchTweetsEvent {
 

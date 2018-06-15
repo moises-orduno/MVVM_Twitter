@@ -2,9 +2,9 @@ package com.moisesorduno.twittermvvm.api;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.moisesorduno.twittermvvm.model.Tweet;
-import com.moisesorduno.twittermvvm.model.TweetList;
-import com.moisesorduno.twittermvvm.model.TwitterTokenType;
+import com.moisesorduno.twittermvvm.model.tweet.Tweet;
+import com.moisesorduno.twittermvvm.model.tweet.TweetList;
+import com.moisesorduno.twittermvvm.model.tweet.TwitterTokenType;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,11 +18,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TwitterApi{
 
-    public final static String CONSUMER_KEY = "fFexrye5XVDsvWRRitABiLxXb";
+    private final static String CONSUMER_KEY = "fFexrye5XVDsvWRRitABiLxXb";
 
-    public final static String CONSUMER_SECRET = "Ge6Su6tslxm0RJ40AiHfYmuQfCY48ktdlPqz1YWFjsSBrDOV8x";
-
-    public final static String TWITTER_SEARCH_URL = "https://api.twitter.com";
+    private final static String CONSUMER_SECRET = "Ge6Su6tslxm0RJ40AiHfYmuQfCY48ktdlPqz1YWFjsSBrDOV8x";
 
     public static final String BEARER_TOKEN_CREDENTIALS = CONSUMER_KEY + ":" + CONSUMER_SECRET;
 
@@ -37,6 +35,7 @@ public class TwitterApi{
     public final static String TWITTER_USER_MEADE = "@JoseAMeadeK";
 
     public final static String TWITTER_USER_BRONCO = "@JaimeRdzNL";
+
     //OkHttp
     public static final int CONNECT_TIMEOUT = 60;
 
@@ -45,6 +44,9 @@ public class TwitterApi{
 
     //amount of tweets
     private static final String TWEETS_MODE = "extended";
+
+    private final static String TWITTER_SEARCH_URL = "https://api.twitter.com";
+
 
     private static volatile TwitterApi mApi;
     private final TwitterService mService;
@@ -104,28 +106,5 @@ public class TwitterApi{
         return mService.getTweetListByUser("Bearer " + accessToken, screenName,TWEETS_LIMIT,
                 TWEETS_MODE);
     }
-//
-//    @Subscribe
-//    public void onGetToken(TwitterGetTokenEvent event) {
-//        try {
-//            mApi.getToken("Basic " + getBase64String(ApiConstants.BEARER_TOKEN_CREDENTIALS),
-//                    "client_credentials").enqueue(new Callback<TwitterTokenType>() {
-//                @Override
-//                public void onResponse(Call<TwitterTokenType> call, Response<TwitterTokenType> response) {
-//                    PrefsController.setAccessToken(TwitterSearchApplication.getAppContext(), response.body().accessToken);
-//                    PrefsController.setTokenType(TwitterSearchApplication.getAppContext(), response.body().tokenType);
-//                    mBus.post(new TwitterGetTokenEventOk());
-//                }
-//
-//                @Override
-//                public void onFailure(Call<TwitterTokenType> call, Throwable t) {
-//                    Log.e(TAG, t.toString(), t);
-//                    mBus.post(new TwitterGetTokenEventFailed());
-//                }
-//            });
-//
-//        } catch (UnsupportedEncodingException e) {
-//            Log.e(TAG, e.toString(), e);
-//        }
-//    }
+
 }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#b6faad</color>
+    <color name="colorPrimary">#1aca02</color>
     <color name="colorPrimaryDark">#236634</color>
     <color name="colorAccent">#e13c3c</color>
     <color name="colorAmlo">#990000</color>
     <color name="colorAnaya">#0000ff</color>
     <color name="colorMeade">#33cc33</color>
-    <color name="colorBronco">#ff9966</color>
+    <color name="colorBronco">#382115</color>
+    <color name="colorNeutral">#adb7ad</color>
 </resources>

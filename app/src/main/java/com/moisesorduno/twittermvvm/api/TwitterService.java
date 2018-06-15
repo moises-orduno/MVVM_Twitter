@@ -1,8 +1,8 @@
 package com.moisesorduno.twittermvvm.api;
 
-import com.moisesorduno.twittermvvm.model.Tweet;
-import com.moisesorduno.twittermvvm.model.TweetList;
-import com.moisesorduno.twittermvvm.model.TwitterTokenType;
+import com.moisesorduno.twittermvvm.model.tweet.Tweet;
+import com.moisesorduno.twittermvvm.model.tweet.TweetList;
+import com.moisesorduno.twittermvvm.model.tweet.TwitterTokenType;
 
 import java.util.List;
 

@@ -33,22 +33,18 @@ public class Poll {
         this.filename = filename;
     }
 
-    public static class PollType {
+    public PollType getPollType() {
+        return pollType;
+    }
 
-        public static final int BLOOMBERG = 0;
-        public static final int MITOFSKY = 1;
-        private static final int SUMMER = 2;
-        private static final int FALL = 3;
+    public enum PollType {
+
+        LINES,
+        BAR ,
+        PIE ,
+        FALL ,
 
 
-        public PollType(@Season int season) {
-            System.out.println("Season :" + season);
-        }
-
-        @IntDef({BLOOMBERG, MITOFSKY, SUMMER, FALL})
-        @Retention(RetentionPolicy.SOURCE)
-        public @interface Season {
-        }
 
     }
 }

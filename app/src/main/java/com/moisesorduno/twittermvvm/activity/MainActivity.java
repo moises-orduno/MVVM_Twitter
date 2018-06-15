@@ -1,6 +1,5 @@
 package com.moisesorduno.twittermvvm.activity;
 
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.moisesorduno.twittermvvm.R;
+import com.moisesorduno.twittermvvm.fragment.GoogleFragment;
 import com.moisesorduno.twittermvvm.fragment.ParentViewPagerFragment;
-import com.moisesorduno.twittermvvm.fragment.StatisticsFragment;
 import com.moisesorduno.twittermvvm.fragment.TwitterFragment;
 
 public class MainActivity extends AppCompatActivity  {
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity  {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_statistics:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,new ParentViewPagerFragment(), ParentViewPagerFragment.TAG).commit();
 
                     return true;
@@ -33,6 +32,8 @@ public class MainActivity extends AppCompatActivity  {
 
                     return true;
                 case R.id.navigation_notifications:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,new GoogleFragment(),GoogleFragment.TAG).commit();
+
                     return true;
             }
             return false;

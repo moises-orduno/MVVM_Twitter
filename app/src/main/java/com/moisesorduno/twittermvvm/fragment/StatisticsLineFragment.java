@@ -1,8 +1,6 @@
 package com.moisesorduno.twittermvvm.fragment;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,38 +13,33 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.moisesorduno.twittermvvm.R;
 import com.moisesorduno.twittermvvm.adapter.DateXAxisValueFormatter;
 import com.moisesorduno.twittermvvm.common.CSVReader;
-import com.moisesorduno.twittermvvm.common.GraphBuilder;
 import com.moisesorduno.twittermvvm.model.Poll;
-import com.moisesorduno.twittermvvm.viewmodel.StatisticsViewModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-public class StatisticsFragment extends Fragment implements java.util.Observer {
+import static com.moisesorduno.twittermvvm.fragment.ParentViewPagerFragment.USERS_COLORS;
 
-    public static final String TAG = StatisticsFragment.class.getSimpleName();
+public class StatisticsLineFragment extends Fragment implements java.util.Observer {
+
+    public static final String TAG = StatisticsLineFragment.class.getSimpleName();
 
 
-    private TextView mTextViewTitle;
     private LineChart mChart;
-    private String mTitle;
     private int mFilename;
-    private GraphBuilder mGraphBuilder = new GraphBuilder();
 
-    public StatisticsFragment() {
+    public StatisticsLineFragment() {
         // Required empty public constructor
     }
 
-    public static StatisticsFragment newInstance(Poll poll) {
-        StatisticsFragment fragment = new StatisticsFragment();
+    public static StatisticsLineFragment newInstance(Poll poll) {
+        StatisticsLineFragment fragment = new StatisticsLineFragment();
 
-        fragment.setTitle(poll.getName());
         fragment.setFilename(poll.getFilename());
         return fragment;
     }
@@ -64,9 +57,7 @@ public class StatisticsFragment extends Fragment implements java.util.Observer {
         // Inflate the layout for this fragment
 
 
-        View view = inflater.inflate(R.layout.fragment_statistics, container, false);
-
-        mTextViewTitle = view.findViewById(R.id.tv_title);
+        View view = inflater.inflate(R.layout.fragment_statistics_line, container, false);
 
         mChart = view.findViewById(R.id.chart);
         loadStatistics();
@@ -76,9 +67,6 @@ public class StatisticsFragment extends Fragment implements java.util.Observer {
 
     private void loadStatistics() {
 
-        mTextViewTitle.setText(String.format("%s%s", getContext().getString(R.string.tag_poll), mTitle));
-
-
         List<String[]> rows = new ArrayList<>();
         CSVReader csvReader = new CSVReader();
         try {
@@ -87,7 +75,7 @@ public class StatisticsFragment extends Fragment implements java.util.Observer {
             e.printStackTrace();
         }
 
-        mGraphBuilder.buildLineData(rows,mChart);
+        buildLineData(rows);
 
     }
 
@@ -110,13 +98,39 @@ public class StatisticsFragment extends Fragment implements java.util.Observer {
 
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
+    public void buildLineData(List<String[]> rows) {
+
+        String[] pollDates  = new String[rows.get(1).length];
+        LineData lineData = new LineData();
+
+        for (int j = 1; j < 5; j++) {
+
+            List<Entry> entries = new ArrayList<>();
+
+
+
+            for (int i = 2; i < rows.get(0).length; i++) {
+                entries.add(new Entry(i, Float.valueOf(rows.get(j)[i])));
+                pollDates[i] = rows.get(0)[i].substring(3);
+            }
+            LineDataSet dataSet = new LineDataSet(entries, rows.get(j)[0]); // add entries to dataset
+            dataSet.setCircleColor(USERS_COLORS[j-1]);
+            dataSet.setColor(USERS_COLORS[j-1]);
+            lineData.addDataSet(dataSet);
+
+        }
+
+
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setValueFormatter(new DateXAxisValueFormatter(pollDates));
+        mChart.setData(lineData);
+        mChart.invalidate();
 
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 
     public void setFilename(int filename) {

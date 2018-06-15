@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.moisesorduno.twittermvvm.R;
 import com.moisesorduno.twittermvvm.common.DateParser;
+import com.moisesorduno.twittermvvm.model.googlequery.GoogleItem;
 import com.moisesorduno.twittermvvm.model.tweet.Tweet;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,14 +23,14 @@ import static com.moisesorduno.twittermvvm.api.TwitterApi.TWITTER_USER_ANAYA;
 import static com.moisesorduno.twittermvvm.api.TwitterApi.TWITTER_USER_BRONCO;
 import static com.moisesorduno.twittermvvm.api.TwitterApi.TWITTER_USER_MEADE;
 
-public class MyTwitterRecyclerViewAdapter extends RecyclerView.Adapter<MyTwitterRecyclerViewAdapter.ViewHolder> {
+public class MyGoogleRecyclerViewAdapter extends RecyclerView.Adapter<MyGoogleRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Tweet> mValues;
+    private final List<GoogleItem> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Context mContext;
 
 
-    public MyTwitterRecyclerViewAdapter(List<Tweet> items, OnListFragmentInteractionListener listener) {
+    public MyGoogleRecyclerViewAdapter(List<GoogleItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -37,7 +39,7 @@ public class MyTwitterRecyclerViewAdapter extends RecyclerView.Adapter<MyTwitter
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item_tweet, parent, false);
+                .inflate(R.layout.fragment_item_google, parent, false);
         mContext = parent.getContext();
         return new ViewHolder(view);
     }
@@ -46,24 +48,10 @@ public class MyTwitterRecyclerViewAdapter extends RecyclerView.Adapter<MyTwitter
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mTextViewUser.setText(holder.mItem.getUser().getName());
-        holder.mTextViewDate.setText(holder.mItem.getSimplifiedCreatedAt());
-        holder.mTextViewTweet.setText(holder.mItem.getFullText());
+        holder.mTextViewGoogleItem.setText(holder.mItem.getTitle());
+        holder.mTextViewGoogleItemDisplayLink.setText(holder.mItem.getDisplayLink());
 
-        switch (("@" + holder.mItem.getUser().getScreenName())) {
-            case TWITTER_USER_AMLO:
-                holder.mImageViewUser.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.pic_amlo));
-                break;
-            case TWITTER_USER_ANAYA:
-                holder.mImageViewUser.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.pic_anaya));
-                break;
-            case TWITTER_USER_MEADE:
-                holder.mImageViewUser.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.pic_meade));
-                break;
-            case TWITTER_USER_BRONCO:
-                holder.mImageViewUser.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.pic_bronco));
-                break;
-        }
+        Picasso.get().load(holder.mItem.getLink()).into(holder.mImageViewGoogleImage);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,30 +70,28 @@ public class MyTwitterRecyclerViewAdapter extends RecyclerView.Adapter<MyTwitter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final View mView;
-        private final TextView mTextViewUser;
-        private final TextView mTextViewDate;
-        private final TextView mTextViewTweet;
-        private final ImageView mImageViewUser;
-        public Tweet mItem;
+        private final TextView mTextViewGoogleItem;
+        private final TextView mTextViewGoogleItemDisplayLink;
+        private final ImageView mImageViewGoogleImage;
+        public GoogleItem mItem;
 
         private ViewHolder(View view) {
             super(view);
             mView = view;
-            mTextViewUser = view.findViewById(R.id.tv_user);
-            mTextViewTweet = view.findViewById(R.id.tv_tweet);
-            mTextViewDate = view.findViewById(R.id.tv_date);
-            mImageViewUser = view.findViewById(R.id.iv_user);
+            mTextViewGoogleItem = view.findViewById(R.id.tv_google_item);
+            mImageViewGoogleImage = view.findViewById(R.id.iv_google_image);
+            mTextViewGoogleItemDisplayLink = view.findViewById(R.id.tv_google_item_display_link);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mTextViewTweet.getText() + "'";
+            return super.toString() + " '" + mTextViewGoogleItem.getText() + "'";
         }
     }
 
 
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(Tweet item);
+        void onListFragmentInteraction(GoogleItem item);
     }
 }

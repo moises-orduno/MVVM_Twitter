@@ -1,4 +1,4 @@
-package com.moisesorduno.twittermvvm.model;
+package com.moisesorduno.twittermvvm.model.tweet;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -63,11 +63,11 @@ public class Tweet {
     @Expose
     private String lang;
 
-    public Date getSimplifiedCreatedAt() {
+    public String getSimplifiedCreatedAt() {
         return simplifiedCreatedAt;
     }
 
-    private Date simplifiedCreatedAt;
+    private String simplifiedCreatedAt;
 
     public String getCreatedAt() {
         return createdAt;
@@ -191,7 +191,7 @@ public class Tweet {
     }
 
 
-    public void setSimplifiedCreatedAt(Date date) {
+    public void setSimplifiedCreatedAt(String date) {
         simplifiedCreatedAt = date;
     }
 

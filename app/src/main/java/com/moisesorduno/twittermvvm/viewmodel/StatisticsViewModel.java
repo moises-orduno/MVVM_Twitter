@@ -7,9 +7,9 @@ import android.widget.ProgressBar;
 
 import com.moisesorduno.twittermvvm.api.TwitterApi;
 import com.moisesorduno.twittermvvm.common.donwloaderrx.RxDownloader;
-import com.moisesorduno.twittermvvm.model.Tweet;
-import com.moisesorduno.twittermvvm.model.TweetList;
-import com.moisesorduno.twittermvvm.model.TwitterTokenType;
+import com.moisesorduno.twittermvvm.model.tweet.Tweet;
+import com.moisesorduno.twittermvvm.model.tweet.TweetList;
+import com.moisesorduno.twittermvvm.model.tweet.TwitterTokenType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package com.moisesorduno.twittermvvm.model;
+package com.moisesorduno.twittermvvm.model.tweet;
 
 import com.google.gson.annotations.SerializedName;
 

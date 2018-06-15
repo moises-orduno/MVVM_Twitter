@@ -11,9 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.moisesorduno.twittermvvm.R;
 import com.moisesorduno.twittermvvm.adapter.MyTwitterRecyclerViewAdapter;
-import com.moisesorduno.twittermvvm.model.Tweet;
+import com.moisesorduno.twittermvvm.model.tweet.Tweet;
 import com.moisesorduno.twittermvvm.viewmodel.TweetViewModel;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class TwitterFragment extends Fragment implements java.util.Observer,MyTw
     private RecyclerView mRecyclerView;
     public static final String TAG = TwitterFragment.class.getSimpleName();
     private TweetViewModel mTweetViewModel;
-    private ProgressBar mProgressBar;
+    private LottieAnimationView mAnimationView;
 
 
     /**
@@ -61,9 +62,10 @@ public class TwitterFragment extends Fragment implements java.util.Observer,MyTw
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_twitter_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_twitter, container, false);
         init(view);
-        mTweetViewModel = new TweetViewModel(getContext(),mRecyclerView,mProgressBar);
+        mTweetViewModel = new TweetViewModel(getContext(),mRecyclerView,mAnimationView);
+
         setUpObserver(mTweetViewModel);
         return view;
     }
@@ -104,7 +106,9 @@ public class TwitterFragment extends Fragment implements java.util.Observer,MyTw
         // Set the adapter
         mRecyclerView = view.findViewById(R.id.rv_tweet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mProgressBar = view.findViewById(R.id.progressbar);
+        mAnimationView = view.findViewById(R.id.animation_view);
+        mAnimationView.setAnimation(R.raw.spinner_into_confirmation);
+
 
     }
 

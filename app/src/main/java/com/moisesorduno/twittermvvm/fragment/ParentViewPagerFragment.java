@@ -1,5 +1,6 @@
 package com.moisesorduno.twittermvvm.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -16,10 +17,15 @@ import com.moisesorduno.twittermvvm.model.Poll;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParentViewPagerFragment  extends Fragment {
+public class ParentViewPagerFragment extends Fragment {
+
+    public static final int[] USERS_COLORS = {Color.parseColor("#990000"),
+            Color.parseColor("#0000ff"), Color.parseColor("#33cc33"),
+            Color.parseColor("#382115"), Color.parseColor("#adb7ad")};
+
 
     public static final String TAG = ParentViewPagerFragment.class.getName();
-    private  List<Poll> mPolls= new ArrayList<>();
+    private List<Poll> mPolls = new ArrayList<>();
 
     public static ParentViewPagerFragment newInstance() {
         return new ParentViewPagerFragment();
@@ -28,8 +34,9 @@ public class ParentViewPagerFragment  extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPolls.add(new Poll("Bloomberg",R.raw.pollbloomberg,new Poll.PollType(Poll.PollType.BLOOMBERG)));
-        mPolls.add(new Poll("Mitofsky",R.raw.mitofsky,new Poll.PollType(Poll.PollType.MITOFSKY)));
+        mPolls.add(new Poll(getString(R.string.poll_bloomberg), R.raw.pollbloomberg, Poll.PollType.LINES));
+        mPolls.add(new Poll(getString(R.string.poll_mitofsky), R.raw.mitofsky, Poll.PollType.LINES));
+        mPolls.add(new Poll(getString(R.string.poll_coparmex_fundacionestepais), R.raw.coparmex_fundacionestepais, Poll.PollType.PIE));
 
 
     }
@@ -40,7 +47,6 @@ public class ParentViewPagerFragment  extends Fragment {
 
         ViewPager viewPager = root.findViewById(R.id.viewPager);
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
-
 
 
         return root;
@@ -59,7 +65,19 @@ public class ParentViewPagerFragment  extends Fragment {
         @Override
         public Fragment getItem(int position) {
 
-            return StatisticsFragment.newInstance(mPolls.get(position));
+            switch (mPolls.get(position).getPollType()) {
+                case LINES:
+                    return StatisticsLineFragment.newInstance(mPolls.get(position));
+                case BAR:
+                    return StatisticsBarFragment.newInstance(mPolls.get(position));
+                case PIE:
+                    return StatisticsPieFragment.newInstance(mPolls.get(position));
+
+                default:
+                    return StatisticsLineFragment.newInstance(mPolls.get(position));
+
+            }
+
         }
 
         @Override
