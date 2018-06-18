@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<RelativeLayout android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
@@ -14,17 +15,25 @@
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation"
         android:layout_alignParentLeft="true" />
+    <!-- view for AdMob Interstitial Ad -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id" />
 
     <FrameLayout
         android:id="@+id/fragment_layout"
         android:layout_width="match_parent"
-        android:layout_height="456dp"
+        android:layout_height="406dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/navigation"
         android:layout_marginLeft="0dp"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="-455dp">
+        android:layout_marginTop="-404dp">
 
     </FrameLayout>
 

@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.moisesorduno.twittermvvm.R;
 import com.moisesorduno.twittermvvm.fragment.GoogleFragment;
 import com.moisesorduno.twittermvvm.fragment.ParentViewPagerFragment;
@@ -48,11 +51,28 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,new ParentViewPagerFragment(), ParentViewPagerFragment.TAG).commit();
+        // Disable the next level button and
 
+        AdView adView =  findViewById(R.id.ad_view);
+        AdRequest adRequest = new AdRequest.Builder()
+                .setRequestAgent("android_studio:ad_template").build();
+        adView.setAdListener(new AdListener() {
+
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                // Any implementation of ImageView can be used!
+
+
+            }
+        });
+        adView.loadAd(adRequest);
     }
 
 }
