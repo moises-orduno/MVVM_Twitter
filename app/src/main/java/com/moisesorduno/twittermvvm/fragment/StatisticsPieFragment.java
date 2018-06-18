@@ -67,7 +67,7 @@ public class StatisticsPieFragment extends Fragment implements java.util.Observe
         mPieChart.setDragDecelerationFrictionCoef(0.1f);
 
 //        mPieChart.setCenterTextTypeface(mTfLight);
-        mPieChart.setCenterText("She's my little rock and roll");
+        mPieChart.setCenterText("Resultados");
 
         mPieChart.setDrawHoleEnabled(true);
         mPieChart.setHoleColor(Color.WHITE);

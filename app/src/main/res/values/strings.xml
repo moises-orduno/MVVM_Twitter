@@ -9,6 +9,7 @@
     <string name="description_google_image">the image from the service</string>
     <string name="poll_bloomberg">Bloomberg</string>
     <string name="poll_mitofsky">Mitofsky</string>
+    <string name="poll_parametria">Parametría</string>
     <string name="poll_coparmex_fundacionestepais">COPARMEX y Fundación Este País</string>
     <string name="tag_presidential_results">Resultados Electorales</string>
 

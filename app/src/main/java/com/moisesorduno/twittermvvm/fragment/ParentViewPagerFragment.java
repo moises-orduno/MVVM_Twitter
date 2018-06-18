@@ -35,8 +35,9 @@ public class ParentViewPagerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPolls.add(new Poll(getString(R.string.poll_bloomberg), R.raw.pollbloomberg, Poll.PollType.LINES));
-        mPolls.add(new Poll(getString(R.string.poll_mitofsky), R.raw.mitofsky, Poll.PollType.LINES));
-        mPolls.add(new Poll(getString(R.string.poll_coparmex_fundacionestepais), R.raw.coparmex_fundacionestepais, Poll.PollType.PIE));
+        mPolls.add(new Poll(getString(R.string.poll_mitofsky), R.raw.pollmitofsky, Poll.PollType.LINES));
+        mPolls.add(new Poll(getString(R.string.poll_parametria), R.raw.pollparametria, Poll.PollType.LINES));
+        mPolls.add(new Poll(getString(R.string.poll_coparmex_fundacionestepais), R.raw.pollcoparmex_fundacionestepais, Poll.PollType.PIE));
 
 
     }

@@ -68,6 +68,8 @@ public class StatisticsLineFragment extends Fragment implements java.util.Observ
 
     private void loadStatistics() {
 
+        if(mFilename==0)return;
+
         List<String[]> rows = new ArrayList<>();
         CSVReader csvReader = new CSVReader();
         try {
