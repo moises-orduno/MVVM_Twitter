@@ -57,7 +57,7 @@ public class GoogleFragment extends Fragment implements java.util.Observer, MyGo
     public void onResume() {
         super.onResume();
 
-        mGoogleViewModel.getGoogleItemsByQuery(GoogleQueryApi.GOOGLE_QUERY);
+        mGoogleViewModel.getGoogleItemsByQuery(GoogleQueryApi.GOOGLE_QUERY_PRESIDENTS);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class GoogleFragment extends Fragment implements java.util.Observer, MyGo
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_google, container, false);
         init(view);
-        mGoogleViewModel = new GoogleViewModel(getContext(), mRecyclerView ,mAnimationView);
+        mGoogleViewModel = new GoogleViewModel(mRecyclerView ,mAnimationView);
         setUpObserver(mGoogleViewModel);
         return view;
     }
@@ -93,8 +93,6 @@ public class GoogleFragment extends Fragment implements java.util.Observer, MyGo
         mGoogleViewModel = (GoogleViewModel) o;
         Log.d(TAG, "update: ");
 
-//        TweetViewModel userViewModel = (TweetViewModel) o;
-//        setTwitters(userViewModel.getTweets());
         setGoogleItems(mGoogleViewModel.getGoogleItemsList());
 
     }

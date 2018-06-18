@@ -1,5 +1,12 @@
 apply plugin: 'com.android.application'
 
+
+def STRING = "String";
+def GOOGLE_API_KEY = "GOOGLE_API_KEY"
+def GOOGLE_SEARCH_ENGINE = "GOOGLE_SEARCH_ENGINE"
+def CONSUMER_KEY = "CONSUMER_KEY";
+def CONSUMER_SECRET = "CONSUMER_SECRET";
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -9,12 +16,19 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField STRING, GOOGLE_API_KEY, '"AIzaSyDmtZ2PQy2bzihmuw0PBMois1GTGF7TxRU"'
+        buildConfigField STRING, GOOGLE_SEARCH_ENGINE, '"001419079092240543192:sivxvvj6xrm"'
+        buildConfigField STRING, CONSUMER_KEY, '"fFexrye5XVDsvWRRitABiLxXb"'
+        buildConfigField STRING, CONSUMER_SECRET, '"Ge6Su6tslxm0RJ40AiHfYmuQfCY48ktdlPqz1YWFjsSBrDOV8x"'
+
     }
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
     }
 }
 

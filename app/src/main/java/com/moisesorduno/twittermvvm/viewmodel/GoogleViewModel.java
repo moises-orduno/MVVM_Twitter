@@ -36,15 +36,12 @@ public class GoogleViewModel extends java.util.Observable {
     private final RecyclerView mRecyclerView;
     private final LottieAnimationView mAnimationView;
     private List<GoogleItem> mGoogleItemList;
-    private Context mContext;
     private GoogleQueryApi mApi;
     public static final String TAG = GoogleViewModel.class.getSimpleName();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private String mScreenName;
 
 
-    public GoogleViewModel(Context context, RecyclerView recyclerView, LottieAnimationView animationView) {
-        mContext = context;
+    public GoogleViewModel(RecyclerView recyclerView, LottieAnimationView animationView) {
         mRecyclerView = recyclerView;
         mAnimationView = animationView;
         mApi = GoogleQueryApi.getInstance();
@@ -111,7 +108,6 @@ public class GoogleViewModel extends java.util.Observable {
     public void reset() {
         unSubscribeFromObservable();
         compositeDisposable = null;
-        mContext = null;
     }
 
     private void showLoader(boolean isLoading) {

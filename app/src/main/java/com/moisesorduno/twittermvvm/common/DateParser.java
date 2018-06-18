@@ -39,16 +39,6 @@ public class DateParser {
             return new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(tweetDate);
         }
 
-//        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", Locale.ENGLISH);
-//        sdf.setLenient(true);
-//
-//        try {
-//            return sdf.parse(date);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-
     }
 
 }

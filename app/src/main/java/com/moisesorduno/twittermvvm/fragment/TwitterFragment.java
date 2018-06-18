@@ -90,8 +90,8 @@ public class TwitterFragment extends Fragment implements java.util.Observer,MyTw
     @Override
     public void update(Observable o, Object arg) {
 
-        TweetViewModel userViewModel = (TweetViewModel) o;
-        setTwitters(userViewModel.getTweets());
+        mTweetViewModel = (TweetViewModel) o;
+        setTwitters(mTweetViewModel.getTweets());
 
 
     }

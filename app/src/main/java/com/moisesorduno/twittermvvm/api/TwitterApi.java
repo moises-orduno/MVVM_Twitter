@@ -2,6 +2,7 @@ package com.moisesorduno.twittermvvm.api;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.moisesorduno.twittermvvm.BuildConfig;
 import com.moisesorduno.twittermvvm.model.tweet.Tweet;
 import com.moisesorduno.twittermvvm.model.tweet.TweetList;
 import com.moisesorduno.twittermvvm.model.tweet.TwitterTokenType;
@@ -18,9 +19,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TwitterApi{
 
-    private final static String CONSUMER_KEY = "fFexrye5XVDsvWRRitABiLxXb";
+    private final static String CONSUMER_KEY = BuildConfig.CONSUMER_KEY;
 
-    private final static String CONSUMER_SECRET = "Ge6Su6tslxm0RJ40AiHfYmuQfCY48ktdlPqz1YWFjsSBrDOV8x";
+    private final static String CONSUMER_SECRET = BuildConfig.CONSUMER_SECRET;
 
     public static final String BEARER_TOKEN_CREDENTIALS = CONSUMER_KEY + ":" + CONSUMER_SECRET;
 
